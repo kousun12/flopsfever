@@ -18,7 +18,7 @@ public class World {
     public float runjobtime;
     public boolean gameOver = false;;
     public int score = 0;
-    int cores[][] = new int[NUM_PROCESSORS][8]; //possible values: 0->free; 1->X; 2->processing; 3->bonus;
+    int cores[][];  //possible values: 0->free; 1->X; 2->processing; 3->bonus;
     public Queue queue;
     public RunningJobQueue rQueue;
     public FinishedJobs finishedJobs;
@@ -38,6 +38,7 @@ public class World {
     	rQueue = new RunningJobQueue();
     	WORLD_WIDTH = w;
     	WORLD_HEIGHT = h;
+    	cores = new int[NUM_PROCESSORS][8];
     }
 
 
@@ -50,7 +51,6 @@ public class World {
         time -= deltaTime;
         addpiecetime+=deltaTime;
         updatescoretime+=deltaTime;
-        runjobtime+=deltaTime;
         if(addpiecetime>3f){
         	addpiecetime=0;
         	queue.addJob(random.nextInt(5),random.nextInt(11), WORLD_WIDTH, 0);
@@ -66,6 +66,14 @@ public class World {
 	        			score+=20;
 	        	}
 	        }
+        }
+        
+        for(int i=0; i<rQueue.getSize(); i++){
+        	RunningJob c = rQueue.getJobinPosition(i);
+        	c.runtime-=deltaTime;
+        	if(c.runtime<=0f){
+        		finishJob(c);
+        	}
         }
         
 
@@ -85,8 +93,9 @@ public class World {
     
     public void finishJob(RunningJob rj){
     	rj.isProcessing = false;
-    	rQueue.remove(rj);
     	finishedJobs.addToFinishedJobs(rj);
+    	rQueue.remove(rj);
+    	
     }
     
 }

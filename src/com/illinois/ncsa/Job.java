@@ -37,6 +37,7 @@ public class Job {
     public float scaleFactor;
     int width;
     int height;
+    float runtime;
 
     public List<Sprite> parts = new ArrayList<Sprite>();
     
@@ -54,7 +55,7 @@ public class Job {
     	numPieces = j.numPieces;
     	position = j.position;
     	parts = j.parts;
-    	
+    	runtime = 3f;
     	
     }
     

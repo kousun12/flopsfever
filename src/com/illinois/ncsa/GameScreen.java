@@ -23,7 +23,7 @@ public class GameScreen extends Screen {
     
     public final int SPRITE_SPACING = 50;
     public final float QUEUE_SCALE = .3f;
-    public final int AE = SCREEN_HEIGHT / 32; //ALLOWED ERROR FOR PLACING SPRITES
+    public final int AE = SCREEN_HEIGHT / 18; //ALLOWED ERROR FOR PLACING SPRITES
     public final int MARGIN = SCREEN_WIDTH*19/480;
     public final int PROCESSOR_SPACING = (2*SPRITE_SPACING + SCREEN_WIDTH*16/480);
     public final int TOP_MARGIN = (SCREEN_HEIGHT*73/320);
@@ -32,9 +32,10 @@ public class GameScreen extends Screen {
     
     GameState state = GameState.Ready;
     World world;
-    int oldScore = 0;
-    String score = "0";
+    //int oldScore = 0;
+    //String score = "0";
     float accumulator = 0f;
+    float acc2 = 0f;
     
     public GameScreen(Game game) {
         super(game);
@@ -88,10 +89,11 @@ public class GameScreen extends Screen {
     		return null;
     	
     	x = Math.round((loc.x - (MARGIN + processor * PROCESSOR_SPACING)) / SPRITE_SPACING);
+    	//float test = loc.y - TOP_MARGIN;
     	y = Math.round((loc.y - TOP_MARGIN) / SPRITE_SPACING);
-    	
     	core = x + 2 * y;
-    	
+    	System.out.println(processor + ", " + core);
+
     	return new Vector2(processor,core);
     	
     }
@@ -117,14 +119,10 @@ public class GameScreen extends Screen {
     }
     
     
-    
-    
     private void updateRunning(List<TouchEvent> touchEvents, float deltaTime) {        
 
-    	
-    	
     	int len = touchEvents.size();
-        //List<Vector2> locations;
+        //List<Vector2> locations; f
 
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
@@ -150,7 +148,7 @@ public class GameScreen extends Screen {
             		for(int j=0; j<currJob.getNumPieces(); j++){
             			currSprite = currJob.getSprite(j);
             			spritePos = currSprite.getPos();
-            			spriteLocation.set( (spritePos%2)*(SPRITE_SPACING)+ currJob.position.x, (SPRITE_SPACING*spritePos/2)+currJob.position.y );
+            			spriteLocation.set( (spritePos%2)*(SPRITE_SPACING)+ currJob.position.x, (SPRITE_SPACING*(spritePos/2))+currJob.position.y );
             			spriteLocation = onValidCore(spriteLocation);
 
             			if(spriteLocation==null){
@@ -160,7 +158,8 @@ public class GameScreen extends Screen {
             			else{            			
             				x = (int)spriteLocation.x;
             				y = (int)spriteLocation.y;
-            				if(y>7 || y<0 || x<0 || x>3 || world.cores[x][y]!=World.FREE){
+            				
+            				if(y>7 || y<0 || x<0 || x>3 || (world.cores[x][y]!=World.FREE)){
             					canBePlaced = false;
             					break;
             				}
@@ -291,7 +290,6 @@ public class GameScreen extends Screen {
     private void drawTimeline(World world){
     	g.drawPixmap(Assets.timeline, (int)(SCREEN_WIDTH*.1), (int)(SCREEN_HEIGHT*.9), 0,0, (int)(Assets.timeline.getWidth()*.933), Assets.timeline.getHeight());
     	g.drawPixmap(Assets.timeline, (int)(SCREEN_WIDTH*.1 + (Assets.timeline.getWidth()*.85)*(world.time/60)), (int)(SCREEN_HEIGHT*.9), (int)(Assets.timeline.getWidth()*.933),0,(int)(Assets.timeline.getWidth()*.063), Assets.timeline.getHeight());
-
     }
     
     private void drawQueue(World world) {
@@ -326,8 +324,10 @@ public class GameScreen extends Screen {
 		if(cJob.isSelected || cJob.isProcessing)
 			scale = 1f;
 		else
-			if(cJob.position.x > MARGIN + (int)(i*3.4*SPRITE_SPACING*QUEUE_SCALE))
-				cJob.setPos(cJob.position.x-15, 0);
+			if(cJob.position.x > MARGIN + (int)(i*3.4*SPRITE_SPACING*QUEUE_SCALE) + SCREEN_WIDTH*15/480){
+				int move = SCREEN_WIDTH*15/480;
+				cJob.setPos(cJob.position.x-move, 0);
+			}
 			else
 				cJob.setPos( MARGIN + (int)(i*3.4*SPRITE_SPACING*QUEUE_SCALE), 0 );
 		

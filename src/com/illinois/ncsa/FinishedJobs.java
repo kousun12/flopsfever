@@ -5,7 +5,7 @@ import java.util.List;
 
 public class FinishedJobs {
 
-    List<Job> jobs = new ArrayList<Job>();
+    List<RunningJob> jobs = new ArrayList<RunningJob>();
 	public int numGalaxy;
 	public int numEpidemic;
 	public int numChemistry;
