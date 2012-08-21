@@ -23,7 +23,7 @@ public class GameScreen extends Screen {
     
     public final int SPRITE_SPACING = 50;
     public final float QUEUE_SCALE = .3f;
-    public final int AE = SCREEN_HEIGHT / 18; //ALLOWED ERROR FOR PLACING SPRITES
+    public final int AE = SCREEN_HEIGHT / 16; //ALLOWED ERROR FOR PLACING SPRITES
     public final int MARGIN = SCREEN_WIDTH*19/480;
     public final int PROCESSOR_SPACING = (2*SPRITE_SPACING + SCREEN_WIDTH*16/480);
     public final int TOP_MARGIN = (SCREEN_HEIGHT*73/320);
