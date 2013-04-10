@@ -56,6 +56,10 @@ public abstract class AndroidGame extends Activity implements Game {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "GLGame");
     }
+    
+    public Context getContext(){
+    	return getApplicationContext();
+    }
 
     @Override
     public void onResume() {

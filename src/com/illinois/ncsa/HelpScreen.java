@@ -21,7 +21,7 @@ public class HelpScreen extends Screen {
         for(int i=0; i<len; i++){
         	TouchEvent event = touchEvents.get(i);
         	if(event.type == TouchEvent.TOUCH_UP){
-        		if( inBounds(event, 10,280,32,32) ) {
+        		if( inBounds(event, 0,270,42,42) ) {
         			game.setScreen(new MainMenuScreen(game));
         		}
         	}

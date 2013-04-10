@@ -1,5 +1,6 @@
 package framework;
 
+
 public interface Graphics {
     public static enum PixmapFormat {
         ARGB8888, ARGB4444, RGB565
@@ -20,6 +21,7 @@ public interface Graphics {
 
     public void drawPixmap(Pixmap pixmap, int x, int y, int srcX, int srcY,
             int srcWidth, int srcHeight);
+    public void drawText(String s, int x, int y, int color, int size);
 
     public void drawPixmap(Pixmap pixmap, int x, int y);
 

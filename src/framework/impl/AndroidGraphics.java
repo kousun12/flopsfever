@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import framework.Graphics;
@@ -78,7 +79,16 @@ public class AndroidGraphics implements Graphics {
         canvas.drawRGB((color & 0xff0000) >> 16, (color & 0xff00) >> 8,
                 (color & 0xff));
     }
-
+    
+    @Override
+    public void drawText(String s, int x, int y, int color, int size){
+    	Typeface t = Typeface.createFromAsset(assets,"ocraextended.ttf");
+    	paint.setTypeface(t);
+    	paint.setColor(color);
+    	paint.setTextSize(size);
+    	//paint.setColor();
+    	canvas.drawText(s, x, y, paint);
+    }
     @Override
     public void drawPixel(int x, int y, int color) {
         paint.setColor(color);
@@ -95,7 +105,7 @@ public class AndroidGraphics implements Graphics {
     public void drawRect(int x, int y, int width, int height, int color) {
         paint.setColor(color);
         paint.setStyle(Style.FILL);
-        canvas.drawRect(x, y, x + width - 1, y + width - 1, paint);
+        canvas.drawRect(x, y, x + width - 1, y + height - 1, paint);
     }
 
     @Override

@@ -13,11 +13,7 @@ public class FinishedJobs {
 	public int numEngineering;
 	
 	
-	public static final int GALAXY = 0;
-    public static final int EPIDEMIC = 1;
-    public static final int CHEMISTRY= 2;
-    public static final int STORM = 3;
-    public static final int ENGINEERING= 4;
+
 	public FinishedJobs(){
 		numGalaxy = 0;
 		numEpidemic = 0;

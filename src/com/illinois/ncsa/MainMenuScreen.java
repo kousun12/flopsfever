@@ -9,7 +9,8 @@ import framework.Screen;
 
 public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
-        super(game);               
+        super(game);         
+        game.getInput().getTouchEvents().clear();
     }   
 
     
@@ -32,10 +33,10 @@ public class MainMenuScreen extends Screen {
                 	playPushed = true;
                 }
                 if(inBounds(event, 158, 146, 75, 75) ) {
-                	aboutPushed = true;
+                	helpPushed = true;
                 }
                 if(inBounds(event, 246, 146, 75, 75) ) {
-                    helpPushed = true;
+                    aboutPushed = true;
                 }
                 if(inBounds(event, 334, 146, 75, 75) ) {
                     scoresPushed = true;
@@ -55,16 +56,16 @@ public class MainMenuScreen extends Screen {
                         Assets.click.play(1);
                     return;
                 }
-                if(inBounds(event, 158, 146, 75, 75) && aboutPushed ) {
+                if(inBounds(event, 158, 146, 75, 75) && helpPushed ) {
                 	
-                    game.setScreen(new AboutScreen(game));
+                    game.setScreen(new HelpScreen(game));
                     if(Settings.soundEnabled)
                         Assets.click.play(1);
                     return;
                 }
-                if(inBounds(event, 246, 146, 75, 75) && helpPushed) {
+                if(inBounds(event, 246, 146, 75, 75) && aboutPushed) {
                 	
-                    game.setScreen(new HelpScreen(game));
+                    game.setScreen(new AboutScreen(game));
                     if(Settings.soundEnabled)
                         Assets.click.play(1);
                     return;
@@ -100,19 +101,19 @@ public class MainMenuScreen extends Screen {
         
         if(playPushed)
         	g.drawPixmap(Assets.hoverm, 64, 140);
-        else if(aboutPushed)
-        	g.drawPixmap(Assets.hoverm, 154, 140);
         else if(helpPushed)
+        	g.drawPixmap(Assets.hoverm, 154, 140);
+        else if(aboutPushed)
         	g.drawPixmap(Assets.hoverm, 241, 140);
         else if(scoresPushed)
         	g.drawPixmap(Assets.hoverm, 330, 140);
         else;
         	
 
-        //if(Settings.soundEnabled)
-          //  g.drawPixmap(Assets.nav, 0, 416, 0, 0, 64, 64);
-        //else
-          //  g.drawPixmap(Assets.nav, 0, 416, 64, 0, 64, 64);
+//        if(Settings.soundEnabled)
+//            g.drawPixmap(Assets.nav, 0, 416, 0, 0, 64, 64);
+//        else
+//            g.drawPixmap(Assets.nav, 0, 416, 64, 0, 64, 64);
     }
 
     @Override

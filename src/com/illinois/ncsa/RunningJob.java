@@ -10,7 +10,7 @@ public class RunningJob extends Job {
 		super(j);
 		processorPos = p;
 		corePos = c;
-		timeLeft = 3f;
+		timeLeft = 5f;
 	}
 	
 	

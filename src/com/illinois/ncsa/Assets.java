@@ -1,5 +1,6 @@
 package com.illinois.ncsa;
 
+import android.graphics.Typeface;
 import framework.Pixmap;
 import framework.Sound;
 
@@ -16,12 +17,13 @@ public class Assets {
     public static Pixmap play;
     public static Pixmap rack;
     public static Pixmap score;
-    public static Pixmap selector;
     public static Pixmap tasksMono;
     public static Pixmap tasks;
     public static Pixmap timeline;
     public static Pixmap hoverl;
     public static Pixmap hoverm;
+    public Typeface t;
+    public static int neonBlue;
     
 
     
